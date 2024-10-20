@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link, Outlet } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, Outlet, useLocation } from "react-router-dom";
 import styled from "styled-components";
 
 const TotalDiv = styled.div`
@@ -41,7 +41,15 @@ const Menu = styled.p`
 `;
 
 export default function Layout() {
-  const [clickedLink, setClickedLink] = useState("main");
+  const [clickedLink, setClickedLink] = useState("");
+  const location = useLocation();
+  useEffect(() => {
+    if (location.pathname === "/") {
+      setClickedLink("main");
+    } else if (location.pathname === "/detail") {
+      setClickedLink("detail");
+    }
+  }, [location.pathname]);
 
   const handleLinkClick = (link) => {
     setClickedLink(link);

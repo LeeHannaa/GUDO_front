@@ -1,5 +1,13 @@
+import CompareComponent from "../components/DetailPage/CompareComponent";
+import DataComponent from "../components/DetailPage/DataComponent";
+
 function DetailPage() {
-  return <>구도 디테일 프로젝트</>;
+  return (
+    <>
+      <CompareComponent />
+      <DataComponent />
+    </>
+  );
 }
 
 export default DetailPage;

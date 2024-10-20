@@ -29,19 +29,19 @@ const StyledLink = styled(Link)`
 `;
 
 const Title = styled.p`
-  font-size: 40px;
+  font-size: 2vw;
   font-weight: bold;
   color: #d1ac58;
   margin-bottom: 100px;
 `;
 const Menu = styled.p`
-  font-size: 28px;
+  font-size: 1.5vw;
   color: ${(props) => (props.clicked ? "#d1ac58" : "#A27F2E")};
   font-weight: ${(props) => (props.clicked ? "bold" : "normal")};
 `;
 
 export default function Layout() {
-  const [clickedLink, setClickedLink] = useState("");
+  const [clickedLink, setClickedLink] = useState("main");
 
   const handleLinkClick = (link) => {
     setClickedLink(link);

@@ -46,6 +46,8 @@ export default function Layout() {
   useEffect(() => {
     if (location.pathname === "/") {
       setClickedLink("main");
+    } else if (location.pathname === "/google") {
+      setClickedLink("google");
     } else if (location.pathname === "/detail") {
       setClickedLink("detail");
     }
@@ -63,6 +65,12 @@ export default function Layout() {
           onClick={() => handleLinkClick("main")}
         >
           <StyledLink to="/">대시보드</StyledLink>
+        </Menu>
+        <Menu
+          clicked={clickedLink === "google"}
+          onClick={() => handleLinkClick("google")}
+        >
+          <StyledLink to="/google">구글트랜드</StyledLink>
         </Menu>
         <Menu
           clicked={clickedLink === "detail"}

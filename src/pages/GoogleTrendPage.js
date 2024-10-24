@@ -8,13 +8,13 @@ const TotalDiv = styled.div`
   height: 100%;
 `;
 const LeftDiv = styled.div`
-  width: 80%;
+  width: 75%;
   @media (max-width: 1230px) {
     width: 100%;
   }
 `;
 const RightDiv = styled.div`
-  width: 20%;
+  width: 25%;
   @media (max-width: 1230px) {
     display: none; /* 화면 너비가 1230px 이하일 때 숨김 */
   }

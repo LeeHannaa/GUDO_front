@@ -39,7 +39,7 @@ function ChannelComponent() {
     fetchTrendData();
   }, [trendData]);
   return (
-    <div style={{ marginTop: "70px" }}>
+    <div style={{ marginTop: "50px" }}>
       <h4>나라별 구글트랜드 지수</h4>
       <div style={{ display: "flex", flexWrap: "wrap", width: "80%" }}>
         {channelsData.length > 0 ? (
@@ -49,7 +49,7 @@ function ChannelComponent() {
                 key={channel.channel}
                 style={{
                   marginBottom: "80px",
-                  height: "180px",
+                  height: "160px",
                   width: "50%",
                 }}
               >

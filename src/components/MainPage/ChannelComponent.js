@@ -1,16 +1,11 @@
 // ChannelComponent.js
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { useRecoilValue } from "recoil";
+import { instaDataState } from "../../stores/atom";
 import PieComponent from "./PieComponent";
 
 const channelsData = [
-  {
-    channel: "instagram",
-    data: [
-      { id: "infinite", value: 50, color: "hsl(357, 70%, 50%)" },
-      { id: "exo", value: 70, color: "hsl(357, 70%, 50%)" },
-      { id: "nike", value: 30, color: "hsl(357, 70%, 50%)" },
-      { id: "kakao", value: 40, color: "hsl(357, 70%, 50%)" },
-    ],
-  },
   {
     channel: "tictok",
     data: [
@@ -40,14 +35,50 @@ const channelsData = [
 ];
 
 function ChannelComponent() {
+  const instaData = useRecoilValue(instaDataState);
+  const [instaStaticData, setInstaStaticData] = useState(null);
+  useEffect(() => {
+    const fetchInstaData = async () => {
+      if (!instaData.keywords) {
+        console.log("키워드를 입력해주세요");
+        return;
+      }
+      try {
+        const response = await axios.get(
+          `${process.env.REACT_APP_BASE_URL}/insta/hashtags/${instaData.keywords}`
+        );
+        console.log("API Response: ", response.data);
+        setInstaStaticData(response.data); // 받아온 데이터를 채널 데이터로 설정
+      } catch (error) {
+        console.error("Error fetching trends:", error);
+      }
+    };
+
+    fetchInstaData();
+  }, [instaData]);
   return (
-    <div style={{ marginTop: "70px" }}>
+    <div style={{ marginTop: "50px" }}>
       <h4>채널별 수집 현황</h4>
       <div style={{ display: "flex", flexWrap: "wrap" }}>
+        {/* insta api */}
+        {instaStaticData ? (
+          <>
+            <div
+              key={instaStaticData.channel}
+              style={{ marginBottom: "80px", height: "160px", width: "50%" }}
+            >
+              <h5>{instaStaticData.channel}</h5>
+              <PieComponent data={instaStaticData.data} />{" "}
+            </div>
+          </>
+        ) : (
+          <></>
+        )}
+
         {channelsData.map((channel) => (
           <div
             key={channel.channel}
-            style={{ marginBottom: "80px", height: "180px", width: "50%" }}
+            style={{ marginBottom: "80px", height: "160px", width: "50%" }}
           >
             <h5>{channel.channel}</h5>
             <PieComponent data={channel.data} />{" "}

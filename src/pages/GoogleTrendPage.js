@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import PeriodComponent from "../components/MainPage/PeriodComponent";
+import PeriodComponent from "../components/GooglePage/PeriodComponent";
 import ChannelComponent from "../components/GooglePage/ChannelComponent";
 import Top20Component from "../components/GooglePage/Top20Component";
 

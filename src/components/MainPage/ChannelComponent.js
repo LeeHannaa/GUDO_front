@@ -14,24 +14,6 @@ const channelsData = [
       { id: "spike", value: 80, color: "hsl(159, 70%, 50%)" },
     ],
   },
-  {
-    channel: "amazon",
-    data: [
-      { id: "monkey", value: 90, color: "hsl(44, 70%, 50%)" },
-      { id: "AMZN", value: 100, color: "hsl(44, 70%, 50%)" },
-      { id: "EC2", value: 100, color: "hsl(44, 70%, 50%)" },
-    ],
-  },
-  {
-    channel: "wallmart",
-    data: [
-      { id: "이건", value: 50, color: "hsl(282, 70%, 50%)" },
-      { id: "뭔", value: 60, color: "hsl(282, 70%, 50%)" },
-      { id: "사이트고", value: 40, color: "hsl(282, 70%, 50%)" },
-      { id: "신기", value: 40, color: "hsl(282, 70%, 50%)" },
-      { id: "방기", value: 40, color: "hsl(282, 70%, 50%)" },
-    ],
-  },
 ];
 
 function ChannelComponent() {

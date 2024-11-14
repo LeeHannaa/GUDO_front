@@ -48,6 +48,8 @@ export default function Layout() {
       setClickedLink("main");
     } else if (location.pathname === "/google") {
       setClickedLink("google");
+    } else if (location.pathname === "/amazon") {
+      setClickedLink("amazon");
     } else if (location.pathname === "/detail") {
       setClickedLink("detail");
     }
@@ -71,6 +73,12 @@ export default function Layout() {
           onClick={() => handleLinkClick("google")}
         >
           <StyledLink to="/google">구글트랜드</StyledLink>
+        </Menu>
+        <Menu
+          clicked={clickedLink === "amazon"}
+          onClick={() => handleLinkClick("amazon")}
+        >
+          <StyledLink to="/amazon">아마존 리뷰</StyledLink>
         </Menu>
         <Menu
           clicked={clickedLink === "detail"}

@@ -50,7 +50,7 @@ const PaginationControls = styled.div`
 `;
 
 const PageButton = styled.button`
-  padding: 5px 10px;
+  padding: 1px 10px;
   margin: 0 5px;
   background-color: #f0f0f0;
   border: 1px solid #ccc;
@@ -62,6 +62,20 @@ const PageButton = styled.button`
   }
 `;
 
+const ReloadButton = styled.button`
+  padding: 10px 15px;
+  background-color: #d1ac58;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  margin-top: 20px;
+  margin-right: 30px;
+  cursor: pointer;
+  &:hover {
+    background-color: #9e8345;
+  }
+`;
+
 function AmazonPage() {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -69,30 +83,27 @@ function AmazonPage() {
   const [currentCategoryPage, setCurrentCategoryPage] = useState(1);
   const [categoriesPerPage, setCategoriesPerPage] = useState(3);
 
+  const fetchBestSellers = async () => {
+    setLoading(true);
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_BASE_URL}/amazon/bestsellers`
+      );
+      setCategories(response.data);
+      localStorage.setItem("categoriesData", JSON.stringify(response.data));
+    } catch (error) {
+      console.error("Failed to load best sellers data", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    // 이전에 저장된 데이터를 확인
     const savedCategories = localStorage.getItem("categoriesData");
     if (savedCategories && savedCategories.length > 0) {
-      // 로컬 저장소에 데이터가 있다면 그것을 사용
       setCategories(JSON.parse(savedCategories));
       setLoading(false);
     } else {
-      // 로컬 저장소에 데이터가 없다면 API 요청
-      const fetchBestSellers = async () => {
-        try {
-          const response = await axios.get(
-            `${process.env.REACT_APP_BASE_URL}/amazon/bestsellers`
-          );
-          setCategories(response.data);
-          // 데이터를 받아오면 localStorage에 저장
-          localStorage.setItem("categoriesData", JSON.stringify(response.data));
-        } catch (error) {
-          console.error("Failed to load best sellers data", error);
-        } finally {
-          setLoading(false);
-        }
-      };
-
       fetchBestSellers();
     }
   }, []);
@@ -129,11 +140,16 @@ function AmazonPage() {
   const handleCardClick = (url) => {
     window.open(url, "_blank");
   };
+  const handleReload = () => {
+    localStorage.removeItem("categoriesData");
+    fetchBestSellers();
+  };
 
   return (
     <Container>
       <Title>Amazon 베스트셀러 리뷰</Title>
       <PaginationControls>
+        <ReloadButton onClick={handleReload}>다시 불러오기</ReloadButton>
         <PageButton
           onClick={() => setCurrentCategoryPage((prev) => prev - 1)}
           disabled={currentCategoryPage === 1}
